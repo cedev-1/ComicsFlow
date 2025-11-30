@@ -2,6 +2,8 @@
 
 A web-based WYSIWYG editor for creating and publishing webtoons and web comics. Build your comic with sections, image zones, speech bubbles, and export it as a standalone HTML file ready to host anywhere.
 
+<img width="1860" height="896" alt="image" src="https://github.com/user-attachments/assets/2bfe492e-ebd3-4d92-9fd0-733ef5029ad9" />
+
 ## Features
 
 - Section-based layout system with predefined templates (full page, split, grid, manga-style)

@@ -122,7 +122,7 @@ const AppContent: React.FC = () => {
           </button>
           <LanguageSelector />
           <a
-            href="https://github.com/cedev-1/web-comics"
+            href="https://github.com/cedev-1/ComicsFlow"
             target="_blank"
             rel="noopener noreferrer"
             className="text-neutral-400 hover:text-white transition-colors"

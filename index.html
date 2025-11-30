@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ComicsFlow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              comic: ['"Comic Neue"', 'cursive', 'sans-serif'],
+              display: ['"Bangers"', 'cursive', 'serif'],
+            },
+            colors: {
+              'ink-black': '#000000',
+              'paper-white': '#ffffff',
+            },
+            boxShadow: {
+              'comic': '8px 8px 0px 0px rgba(0,0,0,1)',
+              'comic-sm': '4px 4px 0px 0px rgba(0,0,0,1)',
+            }
+          }
+        }
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <style>
+      body {
+        background-color: #ffffff;
+        color: #000000;
+        background-image: radial-gradient(#000 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      .bubble-tail-left::after {
+        content: '';
+        position: absolute;
+        bottom: 10px;
+        left: -20px;
+        border-width: 15px 20px 15px 0;
+        border-color: transparent #000 transparent transparent;
+        z-index: 1;
+      }
+      .bubble-tail-left::before {
+        content: '';
+        position: absolute;
+        bottom: 10px;
+        left: -14px;
+        border-width: 12px 17px 12px 0;
+        border-color: transparent #fff transparent transparent;
+        z-index: 2;
+      }
+      
+      .bubble-tail-bottom::after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: 20%;
+        border-width: 20px 15px 0 15px;
+        border-color: #000 transparent transparent transparent;
+        z-index: 1;
+      }
+      .bubble-tail-bottom::before {
+        content: '';
+        position: absolute;
+        bottom: -14px;
+        left: 21%;
+        border-width: 17px 12px 0 12px;
+        border-color: #fff transparent transparent transparent;
+        z-index: 2;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #fff;
+        border-left: 2px solid #000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #000;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #333;
+      }
+    </style>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

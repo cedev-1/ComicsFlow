@@ -380,12 +380,12 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
   }, [editMode, selectedBubbleId, selectedZoneId, selectedSectionId, handleDeleteBubble, handleDeleteZone]);
 
   const handleExport = () => {
-    const data = JSON.stringify({ project }, null, 2);
+    const data = JSON.stringify(project, null, 2);
     const blob = new Blob([data], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${project.title.replace(/\s+/g, '-')}.json`;
+    a.download = `${project.title.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '-').toLowerCase()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -397,11 +397,19 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
     reader.onload = (event) => {
       try {
         const data = JSON.parse(event.target?.result as string);
+        let importedProject = data;
+        
         if (data.project) {
-          onProjectChange(data.project);
+          importedProject = data.project;
+        }
+        
+        if (importedProject.id && importedProject.sections && Array.isArray(importedProject.sections)) {
+          onProjectChange(importedProject);
           setSelectedSectionId(null);
           setSelectedZoneId(null);
           setSelectedBubbleId(null);
+        } else {
+          alert('Import error: Invalid project file');
         }
       } catch {
         alert('Import error');

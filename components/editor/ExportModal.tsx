@@ -112,7 +112,7 @@ const ExportModal: React.FC<ExportModalProps> = ({
 
     const imageHTML = zone.imageUrl 
       ? `<img src="${zone.imageUrl}" alt="" style="width: 100%; height: 100%; object-fit: ${zone.imageFit};" />`
-      : `<div style="width: 100%; height: 100%; background: #e5e5e5; display: flex; align-items: center; justify-content: center; color: #999; font-size: clamp(10px, 3vw, 16px);">Image</div>`;
+      : `<div style="width: 100%; height: 100%; background: #e5e5e5; display: flex; align-items: center; justify-content: center; color: #999; font-size: clamp(10px, 3vw, 16px);">${t.clickToAddImage}</div>`;
 
     return `
       <div class="zone" style="
@@ -364,9 +364,9 @@ const ExportModal: React.FC<ExportModalProps> = ({
   </main>
 
   <footer class="comic-footer">
-    <h2>Fin</h2>
+    <h2>${t.theEnd}</h2>
     <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-      ↑ Relire
+      ↑ ${t.reread}
     </button>
   </footer>
 

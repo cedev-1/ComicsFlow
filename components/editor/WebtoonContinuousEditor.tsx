@@ -221,6 +221,53 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
     }
   }, [project.sections, updateProject, selectedSectionId]);
 
+  const handleDuplicateSection = useCallback((sectionId: string) => {
+    const section = project.sections.find(s => s.id === sectionId);
+    if (!section) return;
+
+    const now = Date.now();
+    const newSectionId = `section-${now}`;
+    const idMap = new Map<string, string>();
+
+    const newZones = section.layout.zones.map(zone => {
+      const newZoneId = `zone-${now}-${Math.random().toString(36).slice(2, 7)}`;
+      idMap.set(zone.id, newZoneId);
+      return {
+        ...zone,
+        id: newZoneId,
+      };
+    });
+
+    const newBubbles = section.bubbles.map(bubble => ({
+      ...bubble,
+      id: `bubble-${now}-${Math.random().toString(36).slice(2, 7)}`,
+      sectionId: newSectionId,
+    }));
+
+    const duplicatedSection: ComicSection = {
+      ...section,
+      id: newSectionId,
+      order: section.order + 1,
+      layout: {
+        ...section.layout,
+        zones: newZones,
+      },
+      bubbles: newBubbles,
+    };
+
+    const sectionIndex = project.sections.findIndex(s => s.id === sectionId);
+    const newSections = [...project.sections];
+    newSections.splice(sectionIndex + 1, 0, duplicatedSection);
+
+    // Recalculer les orders
+    const reorderedSections = newSections.map((s, i) => ({ ...s, order: i }));
+
+    updateProject({ sections: reorderedSections });
+    setSelectedSectionId(newSectionId);
+    setSelectedZoneId(null);
+    setSelectedBubbleId(null);
+  }, [project.sections, updateProject]);
+
   const handleSectionLayoutChange = useCallback((sectionId: string, layoutType: PageLayoutType) => {
     const section = project.sections.find(s => s.id === sectionId);
     if (!section) return;
@@ -425,7 +472,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
     <div className="h-full flex">
       <div className="w-56 bg-[var(--bg-surface)] border-r border-[var(--border-default)] flex flex-col overflow-hidden">
         <div className="p-3 border-b border-[var(--border-default)]">
-          <h3 className="text-sm font-semibold text-[var(--text-secondary)] mb-2">Sections</h3>
+          <h3 className="text-sm font-semibold text-[var(--text-secondary)] mb-2">{t.sections}</h3>
           <button
             onClick={handleAddSection}
             className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-[var(--text-inverse)] rounded text-sm flex items-center justify-center gap-2 transition-colors"
@@ -433,7 +480,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
-            Section
+            {t.addSection}
           </button>
         </div>
 
@@ -454,7 +501,21 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="text-sm text-[var(--text-secondary)]">Section {index + 1}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-[var(--text-secondary)]">{t.section} {index + 1}</span>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDuplicateSection(section.id);
+                    }}
+                    className="p-0.5 rounded hover:bg-[var(--bg-surface-active)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors"
+                    title={t.duplicateSection}
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                  </button>
+                </div>
                 <span className="text-xs text-[var(--text-tertiary)]">{section.height}px</span>
               </div>
               <div className="text-xs text-[var(--text-tertiary)] mt-1">
@@ -468,7 +529,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
         <div className="p-3 border-t border-[var(--border-default)]">
           <div className="text-xs text-[var(--text-tertiary)] space-y-1">
             <div className="flex justify-between">
-              <span>Sections:</span>
+              <span>{t.sections}:</span>
               <span className="text-[var(--text-secondary)]">{project.sections.length}</span>
             </div>
             <div className="flex justify-between">
@@ -595,7 +656,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
                         : 'bg-[var(--bg-surface-active)] text-[var(--text-secondary)]'
                     }`}
                   >
-                    Section {sectionIndex + 1} - {section.layout.type}
+                    {t.section} {sectionIndex + 1} - {section.layout.type}
                   </div>
 
                   {/* Resize handle */}
@@ -674,6 +735,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
           onUpdateZone={(zone) => selectedSectionId && handleUpdateZone(selectedSectionId, zone)}
           onDeleteZone={(zoneId) => selectedSectionId && handleDeleteZone(selectedSectionId, zoneId)}
           onDeleteSection={handleDeleteSection}
+          onDuplicateSection={handleDuplicateSection}
           onLayoutChange={(layoutType) => selectedSectionId && handleSectionLayoutChange(selectedSectionId, layoutType)}
           onAddZone={() => selectedSectionId && handleAddZone(selectedSectionId)}
         />

@@ -41,9 +41,10 @@ export interface Translations {
   section: string;
   addSection: string;
   sectionProperties: string;
-  sectionHeight: string;
-  deleteSection: string;
-  selectSectionToEdit: string;
+    sectionHeight: string;
+    deleteSection: string;
+    duplicateSection: string;
+    selectSectionToEdit: string;
   layoutType: string;
   layoutFull: string;
   layoutSplitH: string;
@@ -62,6 +63,7 @@ export interface Translations {
   cover: string;
   contain: string;
   fill: string;
+  original: string;
   borderRadius: string;
   rotation: string;
   layer: string;
@@ -78,6 +80,8 @@ export interface Translations {
 
   // Sidebar - Bubble properties
   bubbleProperties: string;
+  bubbleText: string;
+  bubbleTextPlaceholder: string;
   bubbleType: string;
   speech: string;
   thought: string;
@@ -174,6 +178,7 @@ export const translations: Record<Language, Translations> = {
     sectionProperties: 'Propriétés de la section',
     sectionHeight: 'Hauteur section',
     deleteSection: 'Supprimer la section',
+    duplicateSection: 'Dupliquer la section',
     selectSectionToEdit: 'Sélectionnez une section pour modifier ses propriétés',
     layoutType: 'Type de mise en page',
     layoutFull: 'Pleine page',
@@ -193,6 +198,7 @@ export const translations: Record<Language, Translations> = {
     cover: 'Couvrir',
     contain: 'Contenir',
     fill: 'Remplir',
+    original: 'Original',
     borderRadius: 'Arrondi',
     rotation: 'Rotation',
     layer: 'Calque',
@@ -209,6 +215,8 @@ export const translations: Record<Language, Translations> = {
 
     // Sidebar - Bubble properties
     bubbleProperties: 'Propriétés de la bulle',
+    bubbleText: 'Texte',
+    bubbleTextPlaceholder: 'Texte de la bulle...',
     bubbleType: 'Type de bulle',
     speech: 'Dialogue',
     thought: 'Pensée',
@@ -304,6 +312,7 @@ export const translations: Record<Language, Translations> = {
     sectionProperties: 'Section properties',
     sectionHeight: 'Section height',
     deleteSection: 'Delete section',
+    duplicateSection: 'Duplicate section',
     selectSectionToEdit: 'Select a section to edit its properties',
     layoutType: 'Layout type',
     layoutFull: 'Full page',
@@ -323,6 +332,7 @@ export const translations: Record<Language, Translations> = {
     cover: 'Cover',
     contain: 'Contain',
     fill: 'Fill',
+    original: 'Original',
     borderRadius: 'Border radius',
     rotation: 'Rotation',
     layer: 'Layer',
@@ -339,6 +349,8 @@ export const translations: Record<Language, Translations> = {
 
     // Sidebar - Bubble properties
     bubbleProperties: 'Bubble properties',
+    bubbleText: 'Text',
+    bubbleTextPlaceholder: 'Bubble text...',
     bubbleType: 'Bubble type',
     speech: 'Speech',
     thought: 'Thought',

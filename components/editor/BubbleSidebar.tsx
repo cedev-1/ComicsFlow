@@ -61,12 +61,12 @@ const BubbleSidebar: React.FC<BubbleSidebarProps> = ({
           </div>
 
           <div className="space-y-1">
-            <label className="text-sm text-[var(--text-secondary)]">Text</label>
+            <label className="text-sm text-[var(--text-secondary)]">{t.bubbleText}</label>
             <textarea
               value={selectedBubble.text}
               onChange={(e) => updateText(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-active)] rounded px-3 py-2 text-sm resize-none h-24 focus:border-[var(--border-focus)] focus:outline-none"
-              placeholder="Bubble text..."
+              placeholder={t.bubbleTextPlaceholder}
             />
           </div>
 

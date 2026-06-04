@@ -9,6 +9,7 @@ interface SectionSidebarProps {
   onUpdateZone: (zone: ImageZone) => void;
   onDeleteZone: (zoneId: string) => void;
   onDeleteSection: (sectionId: string) => void;
+  onDuplicateSection: (sectionId: string) => void;
   onLayoutChange: (layoutType: PageLayoutType) => void;
   onAddZone: () => void;
 }
@@ -75,6 +76,7 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
   onUpdateZone,
   onDeleteZone,
   onDeleteSection,
+  onDuplicateSection,
   onLayoutChange,
   onAddZone,
 }) => {
@@ -173,6 +175,16 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
             </div>
 
             <button
+              onClick={() => onDuplicateSection(selectedSection.id)}
+              className="w-full px-3 py-2 bg-[var(--bg-surface-raised)] hover:bg-[var(--bg-surface-active)] text-[var(--text-secondary)] rounded border border-[var(--border-default)] text-sm flex items-center justify-center gap-2 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              {t.duplicateSection}
+            </button>
+
+            <button
               onClick={() => onDeleteSection(selectedSection.id)}
               className="w-full px-3 py-2 bg-red-900/30 hover:bg-red-800/50 text-red-400 rounded border border-red-900/50 text-sm flex items-center justify-center gap-2 transition-colors"
             >
@@ -200,7 +212,7 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
                 <option value="cover">{t.cover}</option>
                 <option value="contain">{t.contain}</option>
                 <option value="fill">{t.fill}</option>
-                <option value="none">Original</option>
+                <option value="none">{t.original}</option>
               </select>
             </div>
 

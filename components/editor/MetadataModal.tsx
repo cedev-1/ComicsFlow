@@ -68,12 +68,12 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
       onKeyDown={handleKeyDown}
     >
       <div 
-        className="bg-neutral-900 rounded-xl shadow-2xl w-full max-w-lg mx-4 border border-neutral-700 overflow-hidden"
+        className="bg-[var(--bg-surface)] rounded-xl shadow-2xl w-full max-w-lg mx-4 border border-[var(--border-active)] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-neutral-700 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+        <div className="px-6 py-4 border-b border-[var(--border-active)] flex items-center justify-between">
+          <h2 className="text-xl font-bold text-[var(--text-inverse)] flex items-center gap-2">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
@@ -81,7 +81,7 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
           </h2>
           <button
             onClick={onClose}
-            className="text-neutral-400 hover:text-white transition-colors p-1"
+            className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors p-1"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -93,7 +93,7 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
         <div className="p-6 space-y-5">
           {/* Titre */}
           <div>
-            <label className="block text-sm font-medium text-neutral-300 mb-1.5">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
               {t.projectTitle}
             </label>
             <input
@@ -101,13 +101,13 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder={t.untitledProject}
-              className="w-full px-4 py-2.5 bg-neutral-800 border border-neutral-600 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-inverse)] placeholder-[var(--text-tertiary)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
 
           {/* Auteur */}
           <div>
-            <label className="block text-sm font-medium text-neutral-300 mb-1.5">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
               {t.author}
             </label>
             <input
@@ -115,13 +115,13 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
               placeholder={t.anonymousAuthor}
-              className="w-full px-4 py-2.5 bg-neutral-800 border border-neutral-600 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-inverse)] placeholder-[var(--text-tertiary)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-neutral-300 mb-1.5">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
               {t.description}
             </label>
             <textarea
@@ -129,13 +129,13 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
               onChange={(e) => setDescription(e.target.value)}
               placeholder="..."
               rows={3}
-              className="w-full px-4 py-2.5 bg-neutral-800 border border-neutral-600 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+              className="w-full px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-inverse)] placeholder-[var(--text-tertiary)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-neutral-300 mb-1.5">
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
                 {t.projectWidth}
               </label>
               <div className="flex items-center gap-2">
@@ -146,14 +146,14 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
                   min={400}
                   max={1200}
                   step={50}
-                  className="flex-1 px-4 py-2.5 bg-neutral-800 border border-neutral-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="flex-1 px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-inverse)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
-                <span className="text-neutral-400 text-sm">px</span>
+                <span className="text-[var(--text-secondary)] text-sm">px</span>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-neutral-300 mb-1.5">
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
                 {t.globalBackgroundColor}
               </label>
               <div className="flex items-center gap-2">
@@ -161,20 +161,20 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
                   type="color"
                   value={backgroundColor}
                   onChange={(e) => setBackgroundColor(e.target.value)}
-                  className="w-10 h-10 rounded-lg border border-neutral-600 cursor-pointer bg-transparent"
+                  className="w-10 h-10 rounded-lg border border-[var(--border-focus)] cursor-pointer bg-transparent"
                 />
                 <input
                   type="text"
                   value={backgroundColor}
                   onChange={(e) => setBackgroundColor(e.target.value)}
-                  className="flex-1 px-4 py-2.5 bg-neutral-800 border border-neutral-600 rounded-lg text-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="flex-1 px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-inverse)] font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
             </div>
           </div>
 
           {/* Info dates */}
-          <div className="pt-3 border-t border-neutral-700 grid grid-cols-2 gap-4 text-xs text-neutral-500">
+          <div className="pt-3 border-t border-[var(--border-active)] grid grid-cols-2 gap-4 text-xs text-[var(--text-tertiary)]">
             <div>
               <span className="font-medium">{t.createdAt}:</span>{' '}
               {formatDate(project.createdAt)}
@@ -187,16 +187,16 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-neutral-700 flex justify-end gap-3">
+        <div className="px-6 py-4 border-t border-[var(--border-active)] flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition-colors"
+            className="px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-raised)] rounded-lg transition-colors"
           >
             {t.cancel}
           </button>
           <button
             onClick={handleSave}
-            className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
+            className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-[var(--text-inverse)] font-medium rounded-lg transition-colors flex items-center gap-2"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

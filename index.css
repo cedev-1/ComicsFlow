@@ -8,3 +8,85 @@
   --shadow-comic: 8px 8px 0px 0px rgba(0,0,0,1);
   --shadow-comic-sm: 4px 4px 0px 0px rgba(0,0,0,1);
 }
+
+/* ============================================
+   THEME SYSTEM — CSS Custom Properties
+   ============================================ */
+
+:root {
+  /* Light theme (default) */
+  --bg-app: #ffffff;
+  --bg-surface: #f3f4f6;
+  --bg-surface-raised: #e5e7eb;
+  --bg-surface-active: #d1d5db;
+  --bg-surface-hover: #d1d5db;
+  --bg-primary: #2563eb;
+  --bg-primary-hover: #1d4ed8;
+  --bg-canvas: #f9fafb;
+  --bg-input: #ffffff;
+  --bg-danger: #fee2e2;
+  --bg-danger-raised: #fecaca;
+
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-tertiary: #9ca3af;
+  --text-inverse: #ffffff;
+  --text-danger: #dc2626;
+
+  --border-default: #e5e7eb;
+  --border-active: #d1d5db;
+  --border-focus: #3b82f6;
+
+  --ring-focus: #3b82f6;
+
+  /* Scrollbar */
+  --scrollbar-track: #f3f4f6;
+  --scrollbar-thumb: #9ca3af;
+  --scrollbar-thumb-hover: #6b7280;
+}
+
+[data-theme="dark"] {
+  --bg-app: #0a0a0a;
+  --bg-surface: #171717;
+  --bg-surface-raised: #262626;
+  --bg-surface-active: #404040;
+  --bg-surface-hover: #333333;
+  --bg-primary: #2563eb;
+  --bg-primary-hover: #3b82f6;
+  --bg-canvas: #1a1a1a;
+  --bg-input: #262626;
+  --bg-danger: #450a0a;
+  --bg-danger-raised: #7f1d1d;
+
+  --text-primary: #e5e5e5;
+  --text-secondary: #a3a3a3;
+  --text-tertiary: #737373;
+  --text-inverse: #000000;
+  --text-danger: #f87171;
+
+  --border-default: #262626;
+  --border-active: #404040;
+  --border-focus: #3b82f6;
+
+  --ring-focus: #3b82f6;
+
+  /* Scrollbar */
+  --scrollbar-track: #171717;
+  --scrollbar-thumb: #404040;
+  --scrollbar-thumb-hover: #525252;
+}
+
+/* Global scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}

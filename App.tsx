@@ -4,7 +4,7 @@ import WebtoonPreview from './components/editor/WebtoonPreview';
 import MetadataModal from './components/editor/MetadataModal';
 import ExportModal from './components/editor/ExportModal';
 import { ComicProject } from './types/editor';
-import { I18nProvider, useI18n, LanguageSelector } from './i18n';
+import { I18nProvider, useI18n, LanguageSelector, ThemeToggle } from './i18n';
 
 type AppMode = 'editor' | 'preview';
 
@@ -56,29 +56,29 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="h-screen flex flex-col font-comic">
-      <div className="bg-neutral-950 text-neutral-200 px-4 py-2 flex items-center justify-between border-b border-neutral-800 shrink-0">
+      <div className="bg-[var(--bg-app)] text-[var(--text-primary)] px-4 py-2 flex items-center justify-between border-b border-[var(--border-default)] shrink-0">
         <div className="flex items-center gap-4">
           <button
             onClick={() => setIsMetadataModalOpen(true)}
-            className="flex items-center gap-2 text-lg font-medium hover:text-white transition-colors group"
+            className="flex items-center gap-2 text-lg font-medium hover:text-[var(--text-primary)] transition-colors group"
             title={t.editMetadata}
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
             <span className="group-hover:underline">{project.title || t.untitledProject}</span>
-            <svg className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-[var(--text-tertiary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
           </button>
           {project.author && (
-            <span className="text-sm text-neutral-500">{t.by} {project.author}</span>
+            <span className="text-sm text-[var(--text-tertiary)]">{t.by} {project.author}</span>
           )}
-          <div className="flex bg-neutral-900 rounded overflow-hidden border border-neutral-800">
+          <div className="flex bg-[var(--bg-surface)] rounded overflow-hidden border border-[var(--border-default)]">
             <button
               onClick={() => setMode('editor')}
               className={`px-4 py-1 text-sm transition-colors ${
-                mode === 'editor' ? 'bg-neutral-700 text-white' : 'text-neutral-500 hover:text-neutral-300'
+                mode === 'editor' ? 'bg-[var(--bg-surface-active)] text-[var(--text-inverse)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
               }`}
             >
               {t.editing}
@@ -86,7 +86,7 @@ const AppContent: React.FC = () => {
             <button
               onClick={() => setMode('preview')}
               className={`px-4 py-1 text-sm transition-colors ${
-                mode === 'preview' ? 'bg-neutral-700 text-white' : 'text-neutral-500 hover:text-neutral-300'
+                mode === 'preview' ? 'bg-[var(--bg-surface-active)] text-[var(--text-inverse)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
               }`}
             >
               {t.preview}
@@ -94,14 +94,14 @@ const AppContent: React.FC = () => {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <div className="text-sm text-neutral-600">
+          <div className="text-sm text-[var(--text-tertiary)]">
             {mode === 'editor' 
               ? `${project.sections?.length || 0} sections • ${t.editMode}` 
               : t.readMode}
           </div>
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="flex items-center gap-2 px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white rounded-lg transition-colors text-sm"
+            className="flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-surface-raised)] hover:bg-[var(--bg-surface-active)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors text-sm"
             title={t.import}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@ const AppContent: React.FC = () => {
           />
           <button
             onClick={() => setIsExportModalOpen(true)}
-            className="flex items-center gap-2 px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 hover:text-white rounded-lg transition-colors text-sm"
+            className="flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-surface-raised)] hover:bg-[var(--bg-surface-active)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors text-sm"
             title={t.export}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -126,12 +126,13 @@ const AppContent: React.FC = () => {
             </svg>
             {t.export}
           </button>
+          <ThemeToggle />
           <LanguageSelector />
           <a
             href="https://github.com/cedev-1/ComicsFlow"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-neutral-400 hover:text-white transition-colors"
+            className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             title="GitHub Repository"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -168,13 +169,13 @@ const AppContent: React.FC = () => {
         onClose={() => setIsExportModalOpen(false)}
       />
 
-      <div className="bg-neutral-950 text-neutral-500 text-xs text-center py-1.5 border-t border-neutral-800 shrink-0">
+      <div className="bg-[var(--bg-app)] text-[var(--text-tertiary)] text-xs text-center py-1.5 border-t border-[var(--border-default)] shrink-0">
         2025 - ComicsFlow by{' '}
         <a
           href="https://github.com/cedev-1"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-neutral-400 hover:text-white transition-colors"
+          className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
         >
           cedev-1
         </a>

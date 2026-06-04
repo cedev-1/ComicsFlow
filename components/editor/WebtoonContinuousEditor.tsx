@@ -423,12 +423,12 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
 
   return (
     <div className="h-full flex">
-      <div className="w-56 bg-neutral-900 border-r border-neutral-800 flex flex-col overflow-hidden">
-        <div className="p-3 border-b border-neutral-800">
-          <h3 className="text-sm font-semibold text-neutral-300 mb-2">Sections</h3>
+      <div className="w-56 bg-[var(--bg-surface)] border-r border-[var(--border-default)] flex flex-col overflow-hidden">
+        <div className="p-3 border-b border-[var(--border-default)]">
+          <h3 className="text-sm font-semibold text-[var(--text-secondary)] mb-2">Sections</h3>
           <button
             onClick={handleAddSection}
-            className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm flex items-center justify-center gap-2 transition-colors"
+            className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-[var(--text-inverse)] rounded text-sm flex items-center justify-center gap-2 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -449,15 +449,15 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
               }}
               className={`w-full p-2 rounded border text-left transition-colors ${
                 selectedSectionId === section.id
-                  ? 'bg-neutral-700 border-neutral-500'
-                  : 'bg-neutral-800 border-neutral-700 hover:border-neutral-600'
+                  ? 'bg-[var(--bg-surface-active)] border-[var(--border-active)]'
+                  : 'bg-[var(--bg-surface-raised)] border-[var(--border-default)] hover:border-[var(--border-active)]'
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="text-sm text-neutral-300">Section {index + 1}</span>
-                <span className="text-xs text-neutral-500">{section.height}px</span>
+                <span className="text-sm text-[var(--text-secondary)]">Section {index + 1}</span>
+                <span className="text-xs text-[var(--text-tertiary)]">{section.height}px</span>
               </div>
-              <div className="text-xs text-neutral-500 mt-1">
+              <div className="text-xs text-[var(--text-tertiary)] mt-1">
                 {section.layout.type} • {section.layout.zones.length} zones
               </div>
             </button>
@@ -465,28 +465,28 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
         </div>
 
         {/* Stats */}
-        <div className="p-3 border-t border-neutral-800">
-          <div className="text-xs text-neutral-500 space-y-1">
+        <div className="p-3 border-t border-[var(--border-default)]">
+          <div className="text-xs text-[var(--text-tertiary)] space-y-1">
             <div className="flex justify-between">
               <span>Sections:</span>
-              <span className="text-neutral-300">{project.sections.length}</span>
+              <span className="text-[var(--text-secondary)]">{project.sections.length}</span>
             </div>
             <div className="flex justify-between">
               <span>{t.height}:</span>
-              <span className="text-neutral-300">{totalHeight}px</span>
+              <span className="text-[var(--text-secondary)]">{totalHeight}px</span>
             </div>
           </div>
         </div>
 
         {/* Export/Import */}
-        <div className="p-3 border-t border-neutral-800 space-y-2">
+        <div className="p-3 border-t border-[var(--border-default)] space-y-2">
           <button
             onClick={handleExport}
-            className="w-full px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded border border-neutral-700 text-xs transition-colors"
+            className="w-full px-3 py-1.5 bg-[var(--bg-surface-raised)] hover:bg-[var(--bg-surface-active)] text-[var(--text-secondary)] rounded border border-[var(--border-default)] text-xs transition-colors"
           >
             {t.export} JSON
           </button>
-          <label className="block w-full px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded border border-neutral-700 text-xs text-center cursor-pointer transition-colors">
+          <label className="block w-full px-3 py-1.5 bg-[var(--bg-surface-raised)] hover:bg-[var(--bg-surface-active)] text-[var(--text-secondary)] rounded border border-[var(--border-default)] text-xs text-center cursor-pointer transition-colors">
             {t.import} JSON
             <input type="file" accept=".json" className="hidden" onChange={handleImport} />
           </label>
@@ -494,16 +494,16 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
       </div>
 
       {/* Main Canvas (center) */}
-      <div className="flex-1 flex flex-col bg-neutral-800 overflow-hidden">
+      <div className="flex-1 flex flex-col bg-[var(--bg-canvas)] overflow-hidden">
         {/* Toolbar */}
-        <div className="bg-neutral-900 border-b border-neutral-700 px-4 py-2 flex items-center justify-between shrink-0">
+        <div className="bg-[var(--bg-surface)] border-b border-[var(--border-default)] px-4 py-2 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-4">
             {/* Mode switcher */}
-            <div className="flex bg-neutral-800 rounded overflow-hidden border border-neutral-700">
+            <div className="flex bg-[var(--bg-surface-raised)] rounded overflow-hidden border border-[var(--border-default)]">
               <button
                 onClick={() => setEditMode('zones')}
                 className={`px-3 py-1.5 text-sm flex items-center gap-2 transition-colors ${
-                  editMode === 'zones' ? 'bg-neutral-700 text-white' : 'text-neutral-400 hover:text-white'
+                  editMode === 'zones' ? 'bg-[var(--bg-surface-active)] text-[var(--text-inverse)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
                 }`}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -514,7 +514,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
               <button
                 onClick={() => setEditMode('bubbles')}
                 className={`px-3 py-1.5 text-sm flex items-center gap-2 transition-colors ${
-                  editMode === 'bubbles' ? 'bg-neutral-700 text-white' : 'text-neutral-400 hover:text-white'
+                  editMode === 'bubbles' ? 'bg-[var(--bg-surface-active)] text-[var(--text-inverse)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
                 }`}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -529,20 +529,20 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
               <>
                 <button
                   onClick={() => handleAddZone(selectedSectionId)}
-                  className="px-3 py-1.5 bg-black hover:bg-neutral-900 text-white rounded text-sm border border-white transition-colors"
+                  className="px-3 py-1.5 bg-[var(--bg-app)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] rounded text-sm border border-[var(--border-default)] transition-colors"
                 >
                   + {t.addZone}
                 </button>
                 <button
                   onClick={() => handleAddBubble(selectedSectionId)}
-                  className="px-3 py-1.5 bg-black hover:bg-neutral-900 text-white rounded text-sm border border-white transition-colors"
+                  className="px-3 py-1.5 bg-[var(--bg-app)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] rounded text-sm border border-[var(--border-default)] transition-colors"
                 >
                   + {t.addBubble}
                 </button>
               </>
             )}
 
-            <span className="text-xs text-neutral-500">
+            <span className="text-xs text-[var(--text-tertiary)]">
               {editMode === 'bubbles' 
                 ? t.doubleClickToAddBubble
                 : t.selectZoneToEdit}
@@ -554,7 +554,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
         <div 
           ref={canvasRef}
           className="flex-1 overflow-auto"
-          style={{ backgroundColor: '#1a1a1a' }}
+          style={{ backgroundColor: 'var(--bg-canvas)' }}
         >
           <div className="flex justify-center py-8">
             <div
@@ -572,7 +572,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
                   className={`relative border-b-4 border-dashed transition-all ${
                     selectedSectionId === section.id 
                       ? 'border-blue-500' 
-                      : 'border-neutral-400 hover:border-neutral-300'
+                      : 'border-[var(--border-active)] hover:border-[var(--border-focus)]'
                   }`}
                   style={{
                     height: section.height,
@@ -591,8 +591,8 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
                   <div 
                     className={`absolute top-0 left-0 px-2 py-1 text-xs font-medium z-50 ${
                       selectedSectionId === section.id 
-                        ? 'bg-blue-500 text-white' 
-                        : 'bg-neutral-700 text-neutral-300'
+                        ? 'bg-blue-500 text-[var(--text-inverse)]' 
+                        : 'bg-[var(--bg-surface-active)] text-[var(--text-secondary)]'
                     }`}
                   >
                     Section {sectionIndex + 1} - {section.layout.type}
@@ -600,7 +600,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
 
                   {/* Resize handle */}
                   <div
-                    className="absolute bottom-0 left-0 right-0 h-4 bg-neutral-600/50 cursor-ns-resize hover:bg-neutral-500/50 flex items-center justify-center z-50"
+                    className="absolute bottom-0 left-0 right-0 h-4 bg-[var(--bg-surface-active)]/50 cursor-ns-resize hover:bg-[var(--bg-surface-hover)]/50 flex items-center justify-center z-50"
                     onMouseDown={(e) => {
                       e.stopPropagation();
                       const startY = e.clientY;
@@ -621,7 +621,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
                       window.addEventListener('mouseup', handleMouseUp);
                     }}
                   >
-                    <div className="w-16 h-1 bg-neutral-400 rounded" />
+                    <div className="w-16 h-1 bg-[var(--border-active)] rounded" />
                   </div>
 
                   {/* Image Zones */}

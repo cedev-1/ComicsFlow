@@ -142,7 +142,7 @@ const DraggableBubble: React.FC<DraggableBubbleProps> = ({
     }
 
     if (isSelected) {
-      classes += 'ring-2 ring-neutral-400 ring-offset-2 ';
+      classes += 'ring-2 ring-[var(--border-focus)] ring-offset-2 ';
     }
 
     return classes;
@@ -292,7 +292,7 @@ const DraggableBubble: React.FC<DraggableBubbleProps> = ({
       {/* Resize handle */}
       {isSelected && (
         <div
-          className="absolute bottom-0 right-0 w-4 h-4 bg-neutral-500 cursor-se-resize rounded-tl"
+          className="absolute bottom-0 right-0 w-4 h-4 bg-[var(--text-tertiary)] cursor-se-resize rounded-tl"
           onMouseDown={handleResizeMouseDown}
         />
       )}

@@ -245,7 +245,7 @@ const DraggableImageZone: React.FC<DraggableImageZoneProps> = ({
           />
         ) : (
           <div
-            className="w-full h-full bg-neutral-200 border-2 border-dashed border-neutral-400 flex flex-col items-center justify-center text-neutral-500 hover:bg-neutral-300 transition-colors"
+            className="w-full h-full bg-[var(--border-default)] border-2 border-dashed border-[var(--border-active)] flex flex-col items-center justify-center text-[var(--text-tertiary)] hover:bg-[var(--border-focus)] transition-colors"
             onClick={() => fileInputRef.current?.click()}
           >
             <svg className="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -286,18 +286,18 @@ const WebtoonPreview: React.FC<WebtoonPreviewProps> = ({ project, onBack }) => {
   return (
     <div 
       ref={containerRef}
-      className="h-full overflow-y-auto bg-neutral-900"
+      className="h-full overflow-y-auto bg-[var(--bg-app)]"
     >
       {/* Header fixe */}
-      <header className="sticky top-0 bg-neutral-950/90 backdrop-blur-sm z-50 border-b border-neutral-800">
+      <header className="sticky top-0 bg-[var(--bg-app)]/90 backdrop-blur-sm z-50 border-b border-[var(--border-default)]">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <div>
-            <h1 className="text-lg font-bold text-white">{project.title}</h1>
-            <p className="text-xs text-neutral-500">{t.by} {project.author}</p>
+            <h1 className="text-lg font-bold text-[var(--text-primary)]">{project.title}</h1>
+            <p className="text-xs text-[var(--text-tertiary)]">{t.by} {project.author}</p>
           </div>
           <button
             onClick={onBack}
-            className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white text-sm rounded transition-colors"
+            className="px-4 py-2 bg-[var(--bg-surface-raised)] hover:bg-[var(--bg-surface-active)] text-[var(--text-inverse)] text-sm rounded transition-colors"
           >
             ← {t.back}
           </button>
@@ -347,18 +347,18 @@ const WebtoonPreview: React.FC<WebtoonPreviewProps> = ({ project, onBack }) => {
       </main>
 
       {/* Footer - Fin */}
-      <footer className="py-16 text-center border-t border-neutral-800 bg-neutral-950">
-        <h2 className="text-3xl font-display text-white mb-4">{t.theEnd}</h2>
+      <footer className="py-16 text-center border-t border-[var(--border-default)] bg-[var(--bg-app)]">
+        <h2 className="text-3xl font-display text-[var(--text-primary)] mb-4">{t.theEnd}</h2>
         <div className="flex justify-center gap-4">
           <button
             onClick={() => containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="px-6 py-3 bg-white text-black font-bold rounded hover:bg-neutral-200 transition-colors"
+            className="px-6 py-3 bg-[var(--bg-surface-raised)] text-[var(--text-primary)] font-bold rounded hover:bg-[var(--bg-surface-active)] transition-colors"
           >
             ↑ {t.reread}
           </button>
           <button
             onClick={onBack}
-            className="px-6 py-3 bg-neutral-800 text-white font-bold rounded hover:bg-neutral-700 transition-colors border border-neutral-600"
+            className="px-6 py-3 bg-[var(--bg-surface-raised)] text-[var(--text-inverse)] font-bold rounded hover:bg-[var(--bg-surface-active)] transition-colors border border-[var(--border-active)]"
           >
             ← {t.backToEditor}
           </button>

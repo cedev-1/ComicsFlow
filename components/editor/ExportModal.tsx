@@ -469,12 +469,12 @@ const ExportModal: React.FC<ExportModalProps> = ({
       onClick={onClose}
     >
       <div 
-        className="bg-neutral-900 rounded-xl shadow-2xl w-full max-w-md mx-4 border border-neutral-700 overflow-hidden"
+        className="bg-[var(--bg-surface)] rounded-xl shadow-2xl w-full max-w-md mx-4 border border-[var(--border-active)] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-neutral-700 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+        <div className="px-6 py-4 border-b border-[var(--border-active)] flex items-center justify-between">
+          <h2 className="text-xl font-bold text-[var(--text-inverse)] flex items-center gap-2">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
             </svg>
@@ -482,7 +482,7 @@ const ExportModal: React.FC<ExportModalProps> = ({
           </h2>
           <button
             onClick={onClose}
-            className="text-neutral-400 hover:text-white transition-colors p-1"
+            className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors p-1"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -492,7 +492,7 @@ const ExportModal: React.FC<ExportModalProps> = ({
 
         {/* Content */}
         <div className="p-6 space-y-4">
-          <p className="text-neutral-400 text-sm">
+          <p className="text-[var(--text-secondary)] text-sm">
             {t.chooseExportFormat} "{project.title}"
           </p>
 
@@ -502,7 +502,7 @@ const ExportModal: React.FC<ExportModalProps> = ({
               className={`flex items-start gap-4 p-4 rounded-lg border-2 cursor-pointer transition-all ${
                 exportFormat === 'html' 
                   ? 'border-blue-500 bg-blue-500/10' 
-                  : 'border-neutral-700 hover:border-neutral-600'
+                  : 'border-[var(--border-active)] hover:border-[var(--border-focus)]'
               }`}
               onClick={() => setExportFormat('html')}
             >
@@ -518,9 +518,9 @@ const ExportModal: React.FC<ExportModalProps> = ({
                   <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
-                  <span className="font-medium text-white">{t.websiteHtml}</span>
+                  <span className="font-medium text-[var(--text-inverse)]">{t.websiteHtml}</span>
                 </div>
-                <p className="text-xs text-neutral-500 mt-1">
+                <p className="text-xs text-[var(--text-tertiary)] mt-1">
                   {t.htmlDescription}
                 </p>
               </div>
@@ -530,7 +530,7 @@ const ExportModal: React.FC<ExportModalProps> = ({
               className={`flex items-start gap-4 p-4 rounded-lg border-2 cursor-pointer transition-all ${
                 exportFormat === 'json' 
                   ? 'border-blue-500 bg-blue-500/10' 
-                  : 'border-neutral-700 hover:border-neutral-600'
+                  : 'border-[var(--border-active)] hover:border-[var(--border-focus)]'
               }`}
               onClick={() => setExportFormat('json')}
             >
@@ -546,9 +546,9 @@ const ExportModal: React.FC<ExportModalProps> = ({
                   <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                   </svg>
-                  <span className="font-medium text-white">{t.projectJson}</span>
+                  <span className="font-medium text-[var(--text-inverse)]">{t.projectJson}</span>
                 </div>
-                <p className="text-xs text-neutral-500 mt-1">
+                <p className="text-xs text-[var(--text-tertiary)] mt-1">
                   {t.jsonDescription}
                 </p>
               </div>
@@ -557,17 +557,17 @@ const ExportModal: React.FC<ExportModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-neutral-700 flex justify-end gap-3">
+        <div className="px-6 py-4 border-t border-[var(--border-active)] flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition-colors"
+            className="px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-raised)] rounded-lg transition-colors"
           >
             {t.cancel}
           </button>
           <button
             onClick={handleExport}
             disabled={isExporting}
-            className="px-5 py-2 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-800 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors flex items-center gap-2"
+            className="px-5 py-2 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-800 disabled:cursor-not-allowed text-[var(--text-inverse)] font-medium rounded-lg transition-colors flex items-center gap-2"
           >
             {isExporting ? (
               <>

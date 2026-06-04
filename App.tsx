@@ -111,7 +111,7 @@ const AppContent: React.FC = () => {
             <button
               onClick={() => setMode('editor')}
               className={`px-4 py-1 text-sm transition-colors ${
-                mode === 'editor' ? 'bg-[var(--bg-surface-active)] text-[var(--text-inverse)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
+                mode === 'editor' ? 'bg-[var(--bg-surface-active)] text-[var(--text-primary)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
               }`}
             >
               {t.editing}
@@ -119,7 +119,7 @@ const AppContent: React.FC = () => {
             <button
               onClick={() => setMode('preview')}
               className={`px-4 py-1 text-sm transition-colors ${
-                mode === 'preview' ? 'bg-[var(--bg-surface-active)] text-[var(--text-inverse)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
+                mode === 'preview' ? 'bg-[var(--bg-surface-active)] text-[var(--text-primary)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
               }`}
             >
               {t.preview}

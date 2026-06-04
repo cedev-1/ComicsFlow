@@ -73,7 +73,7 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
       >
         {/* Header */}
         <div className="px-6 py-4 border-b border-[var(--border-active)] flex items-center justify-between">
-          <h2 className="text-xl font-bold text-[var(--text-inverse)] flex items-center gap-2">
+          <h2 className="text-xl font-bold text-[var(--text-primary)] flex items-center gap-2">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
@@ -101,7 +101,7 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder={t.untitledProject}
-              className="w-full px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-inverse)] placeholder-[var(--text-tertiary)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
 
@@ -115,7 +115,7 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
               placeholder={t.anonymousAuthor}
-              className="w-full px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-inverse)] placeholder-[var(--text-tertiary)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
 
@@ -129,7 +129,7 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
               onChange={(e) => setDescription(e.target.value)}
               placeholder="..."
               rows={3}
-              className="w-full px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-inverse)] placeholder-[var(--text-tertiary)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+              className="w-full px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
             />
           </div>
 
@@ -146,7 +146,7 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
                   min={400}
                   max={1200}
                   step={50}
-                  className="flex-1 px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-inverse)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="flex-1 px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
                 <span className="text-[var(--text-secondary)] text-sm">px</span>
               </div>
@@ -167,7 +167,7 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
                   type="text"
                   value={backgroundColor}
                   onChange={(e) => setBackgroundColor(e.target.value)}
-                  className="flex-1 px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-inverse)] font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="flex-1 px-4 py-2.5 bg-[var(--bg-surface-raised)] border border-[var(--border-focus)] rounded-lg text-[var(--text-primary)] font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
             </div>
@@ -176,11 +176,11 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
           {/* Info dates */}
           <div className="pt-3 border-t border-[var(--border-active)] grid grid-cols-2 gap-4 text-xs text-[var(--text-tertiary)]">
             <div>
-              <span className="font-medium">{t.createdAt}:</span>{' '}
+              <span className="font-medium text-[var(--text-secondary)]">{t.createdAt}:</span>{' '}
               {formatDate(project.createdAt)}
             </div>
             <div>
-              <span className="font-medium">{t.updatedAt}:</span>{' '}
+              <span className="font-medium text-[var(--text-secondary)]">{t.updatedAt}:</span>{' '}
               {formatDate(project.updatedAt)}
             </div>
           </div>
@@ -196,7 +196,7 @@ const MetadataModal: React.FC<MetadataModalProps> = ({
           </button>
           <button
             onClick={handleSave}
-            className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-[var(--text-inverse)] font-medium rounded-lg transition-colors flex items-center gap-2"
+            className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

@@ -58,7 +58,7 @@ export const LanguageSelector: React.FC<{ className?: string }> = ({ className =
         onClick={() => setLanguage('fr')}
         className={`px-2 py-1 text-xs rounded transition-colors ${
           language === 'fr'
-            ? 'bg-[var(--bg-surface-active)] text-[var(--text-inverse)]'
+            ? 'bg-[var(--bg-surface-active)] text-[var(--text-primary)]'
             : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
         }`}
       >
@@ -68,7 +68,7 @@ export const LanguageSelector: React.FC<{ className?: string }> = ({ className =
         onClick={() => setLanguage('en')}
         className={`px-2 py-1 text-xs rounded transition-colors ${
           language === 'en'
-            ? 'bg-[var(--bg-surface-active)] text-[var(--text-inverse)]'
+            ? 'bg-[var(--bg-surface-active)] text-[var(--text-primary)]'
             : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
         }`}
       >

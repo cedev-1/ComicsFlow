@@ -488,7 +488,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
           <h3 className="text-sm font-semibold text-[var(--text-secondary)] mb-2">{t.sections}</h3>
           <button
             onClick={handleAddSection}
-            className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-[var(--text-inverse)] rounded text-sm flex items-center justify-center gap-2 transition-colors"
+            className="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm flex items-center justify-center gap-2 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -622,7 +622,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
               <button
                 onClick={() => setEditMode('zones')}
                 className={`px-3 py-1.5 text-sm flex items-center gap-2 transition-colors ${
-                  editMode === 'zones' ? 'bg-[var(--bg-surface-active)] text-[var(--text-inverse)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
+                  editMode === 'zones' ? 'bg-[var(--bg-surface-active)] text-[var(--text-primary)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
                 }`}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -633,7 +633,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
               <button
                 onClick={() => setEditMode('bubbles')}
                 className={`px-3 py-1.5 text-sm flex items-center gap-2 transition-colors ${
-                  editMode === 'bubbles' ? 'bg-[var(--bg-surface-active)] text-[var(--text-inverse)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
+                  editMode === 'bubbles' ? 'bg-[var(--bg-surface-active)] text-[var(--text-primary)]' : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
                 }`}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -710,7 +710,7 @@ const WebtoonContinuousEditor: React.FC<WebtoonContinuousEditorProps> = ({
                   <div 
                     className={`absolute top-0 left-0 px-2 py-1 text-xs font-medium z-50 ${
                       selectedSectionId === section.id 
-                        ? 'bg-blue-500 text-[var(--text-inverse)]' 
+                        ? 'bg-blue-500 text-white' 
                         : 'bg-[var(--bg-surface-active)] text-[var(--text-secondary)]'
                     }`}
                   >

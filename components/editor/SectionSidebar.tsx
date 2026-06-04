@@ -112,7 +112,7 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
                     ...selectedSection, 
                     height: Math.max(100, Math.min(2000, parseInt(e.target.value) || 400)) 
                   })}
-                  className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-3 py-1.5 text-sm text-[var(--text-inverse)]"
+                  className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-3 py-1.5 text-sm text-[var(--text-primary)]"
                   min={100}
                   max={2000}
                   step={50}
@@ -132,7 +132,7 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
                     type="text"
                     value={selectedSection.backgroundColor}
                     onChange={(e) => onUpdateSection({ ...selectedSection, backgroundColor: e.target.value })}
-                    className="flex-1 bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-3 py-1.5 text-sm text-[var(--text-inverse)] font-mono"
+                    className="flex-1 bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-3 py-1.5 text-sm text-[var(--text-primary)] font-mono"
                   />
                 </div>
               </div>
@@ -207,7 +207,7 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
               <select
                 value={selectedZone.imageFit}
                 onChange={(e) => onUpdateZone({ ...selectedZone, imageFit: e.target.value as ImageZone['imageFit'] })}
-                className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-3 py-1.5 text-sm text-[var(--text-inverse)]"
+                className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-3 py-1.5 text-sm text-[var(--text-primary)]"
               >
                 <option value="cover">{t.cover}</option>
                 <option value="contain">{t.contain}</option>
@@ -236,7 +236,7 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
                   type="number"
                   value={Math.round(selectedZone.position.x)}
                   onChange={(e) => onUpdateZone({ ...selectedZone, position: { ...selectedZone.position, x: parseFloat(e.target.value) || 0 } })}
-                  className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-2 py-1 text-sm text-[var(--text-inverse)]"
+                  className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-2 py-1 text-sm text-[var(--text-primary)]"
                   min={0}
                   max={100}
                 />
@@ -247,7 +247,7 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
                   type="number"
                   value={Math.round(selectedZone.position.y)}
                   onChange={(e) => onUpdateZone({ ...selectedZone, position: { ...selectedZone.position, y: parseFloat(e.target.value) || 0 } })}
-                  className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-2 py-1 text-sm text-[var(--text-inverse)]"
+                  className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-2 py-1 text-sm text-[var(--text-primary)]"
                   min={0}
                   max={100}
                 />
@@ -258,7 +258,7 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
                   type="number"
                   value={Math.round(selectedZone.size.width)}
                   onChange={(e) => onUpdateZone({ ...selectedZone, size: { ...selectedZone.size, width: parseFloat(e.target.value) || 10 } })}
-                  className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-2 py-1 text-sm text-[var(--text-inverse)]"
+                  className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-2 py-1 text-sm text-[var(--text-primary)]"
                   min={5}
                   max={100}
                 />
@@ -269,7 +269,7 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
                   type="number"
                   value={Math.round(selectedZone.size.height)}
                   onChange={(e) => onUpdateZone({ ...selectedZone, size: { ...selectedZone.size, height: parseFloat(e.target.value) || 10 } })}
-                  className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-2 py-1 text-sm text-[var(--text-inverse)]"
+                  className="w-full bg-[var(--bg-surface-raised)] border border-[var(--border-active)] rounded px-2 py-1 text-sm text-[var(--text-primary)]"
                   min={5}
                   max={100}
                 />

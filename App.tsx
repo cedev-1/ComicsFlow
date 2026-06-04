@@ -5,13 +5,22 @@ import MetadataModal from './components/editor/MetadataModal';
 import ExportModal from './components/editor/ExportModal';
 import { ComicProject } from './types/editor';
 import { I18nProvider, useI18n, LanguageSelector, ThemeToggle } from './i18n';
+import { useProjectHistory } from './hooks/useProjectHistory';
 
 type AppMode = 'editor' | 'preview';
 
 const AppContent: React.FC = () => {
   const [mode, setMode] = useState<AppMode>('editor');
   const { t } = useI18n();
-  const [project, setProject] = useState<ComicProject>(() => createInitialProject(t));
+  const [initialProject] = useState<ComicProject>(() => createInitialProject(t));
+  const {
+    current: project,
+    push: pushProject,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
+  } = useProjectHistory<ComicProject>(initialProject);
   const [isMetadataModalOpen, setIsMetadataModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -22,8 +31,32 @@ const AppContent: React.FC = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      
+      const isCtrl = e.ctrlKey || e.metaKey;
+      if (!isCtrl) return;
+
+      if (e.key === 'z' && !e.shiftKey) {
+        e.preventDefault();
+        if (canUndo) undo();
+      } else if ((e.key === 'z' && e.shiftKey) || e.key === 'y') {
+        e.preventDefault();
+        if (canRedo) redo();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [undo, redo, canUndo, canRedo]);
+
   const handleMetadataSave = (updates: Partial<ComicProject>) => {
-    setProject(prev => ({ ...prev, ...updates }));
+    pushProject({ ...project, ...updates });
+  };
+
+  const handleProjectChange = (newProject: ComicProject) => {
+    pushProject(newProject);
   };
 
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +74,7 @@ const AppContent: React.FC = () => {
         }
         
         if (importedProject.id && importedProject.sections && Array.isArray(importedProject.sections)) {
-          setProject(importedProject);
+          pushProject(importedProject);
         } else {
           alert('Invalid project file');
         }
@@ -94,6 +127,28 @@ const AppContent: React.FC = () => {
           </div>
         </div>
         <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1">
+            <button
+              onClick={undo}
+              disabled={!canUndo}
+              className="p-1.5 rounded hover:bg-[var(--bg-surface-raised)] text-[var(--text-secondary)] disabled:text-[var(--text-tertiary)] disabled:opacity-40 transition-colors"
+              title={`${t.undo} (Ctrl+Z)`}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+              </svg>
+            </button>
+            <button
+              onClick={redo}
+              disabled={!canRedo}
+              className="p-1.5 rounded hover:bg-[var(--bg-surface-raised)] text-[var(--text-secondary)] disabled:text-[var(--text-tertiary)] disabled:opacity-40 transition-colors"
+              title={`${t.redo} (Ctrl+Shift+Z)`}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 10h-10a8 8 0 00-8 8v2M21 10l-6 6m6-6l-6-6" />
+              </svg>
+            </button>
+          </div>
           <div className="text-sm text-[var(--text-tertiary)]">
             {mode === 'editor' 
               ? `${project.sections?.length || 0} sections • ${t.editMode}` 
@@ -146,7 +201,7 @@ const AppContent: React.FC = () => {
         {mode === 'editor' ? (
           <WebtoonContinuousEditor 
             project={project} 
-            onProjectChange={setProject} 
+            onProjectChange={handleProjectChange} 
           />
         ) : (
           <WebtoonPreview 

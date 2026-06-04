@@ -126,6 +126,10 @@ export interface Translations {
   doubleClickToAddBubble: string;
   pressDeleteToRemove: string;
 
+  // Undo/Redo
+  undo: string;
+  redo: string;
+
   // Export Modal
   chooseExportFormat: string;
   websiteHtml: string;
@@ -261,6 +265,10 @@ export const translations: Record<Language, Translations> = {
     doubleClickToAddBubble: 'Double-cliquez pour ajouter une bulle',
     pressDeleteToRemove: 'Appuyez sur Suppr pour supprimer',
 
+    // Undo/Redo
+    undo: 'Annuler',
+    redo: 'Rétablir',
+
     // Export Modal
     chooseExportFormat: 'Choisissez le format d\'export pour votre BD',
     websiteHtml: 'Site Web (HTML)',
@@ -394,6 +402,10 @@ export const translations: Record<Language, Translations> = {
     doubleClickToEdit: 'Double-click to edit',
     doubleClickToAddBubble: 'Double-click to add a bubble',
     pressDeleteToRemove: 'Press Delete to remove',
+
+    // Undo/Redo
+    undo: 'Undo',
+    redo: 'Redo',
 
     // Export Modal
     chooseExportFormat: 'Choose the export format for your comic',

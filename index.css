@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --font-comic: "Comic Neue", cursive, sans-serif;
+  --font-display: "Bangers", cursive, serif;
+  --color-ink-black: #000000;
+  --color-paper-white: #ffffff;
+  --shadow-comic: 8px 8px 0px 0px rgba(0,0,0,1);
+  --shadow-comic-sm: 4px 4px 0px 0px rgba(0,0,0,1);
+}

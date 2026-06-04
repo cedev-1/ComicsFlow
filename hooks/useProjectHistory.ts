@@ -1,91 +1,61 @@
 import { useState, useRef, useCallback } from 'react';
 
 const MAX_HISTORY = 50;
-const DEBOUNCE_MS = 500;
 
 export function useProjectHistory<T>(initialState: T) {
-  const [history, setHistory] = useState<T[]>([initialState]);
-  const [index, setIndex] = useState(0);
-  const lastPushRef = useRef(Date.now());
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [current, setCurrent] = useState<T>(initialState);
+  
+  const historyRef = useRef<T[]>([initialState]);
+  const indexRef = useRef(0);
 
-  const current = history[index];
-  const canUndo = index > 0;
-  const canRedo = index < history.length - 1;
+  const canUndo = indexRef.current > 0;
+  const canRedo = indexRef.current < historyRef.current.length - 1;
 
   const push = useCallback((newState: T) => {
-    const now = Date.now();
-
-    // Si un timer est en cours, on l'annule et on repousse
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
+    const lastState = historyRef.current[indexRef.current];
+    if (JSON.stringify(lastState) === JSON.stringify(newState)) {
+      return;
     }
 
-    // Si la dernière push date de moins de DEBOUNCE_MS, on remplace l'état courant
-    if (now - lastPushRef.current < DEBOUNCE_MS) {
-      timerRef.current = setTimeout(() => {
-        setHistory(prev => {
-          const trimmed = prev.slice(0, index + 1);
-          const last = trimmed[trimmed.length - 1];
-          // Ne pas pousser si identique au dernier état
-          if (JSON.stringify(last) === JSON.stringify(newState)) return prev;
-          const next = [...trimmed, newState];
-          if (next.length > MAX_HISTORY) next.shift();
-          return next;
-        });
-        setIndex(prev => {
-          const nextIndex = Math.min(prev + 1, MAX_HISTORY - 1);
-          return nextIndex;
-        });
-        lastPushRef.current = Date.now();
-        timerRef.current = null;
-      }, DEBOUNCE_MS);
+    const trimmed = historyRef.current.slice(0, indexRef.current + 1);
+    
+    const next = [...trimmed, newState];
+    if (next.length > MAX_HISTORY) {
+      next.shift();
+      indexRef.current = MAX_HISTORY - 1;
     } else {
-      // Push immédiat
-      setHistory(prev => {
-        const trimmed = prev.slice(0, index + 1);
-        const last = trimmed[trimmed.length - 1];
-        if (JSON.stringify(last) === JSON.stringify(newState)) return prev;
-        const next = [...trimmed, newState];
-        if (next.length > MAX_HISTORY) next.shift();
-        return next;
-      });
-      setIndex(prev => {
-        const nextIndex = Math.min(prev + 1, MAX_HISTORY - 1);
-        return nextIndex;
-      });
-      lastPushRef.current = now;
+      indexRef.current += 1;
     }
-  }, [index]);
+    
+    historyRef.current = next;
+    setCurrent(newState);
+  }, []);
 
   const undo = useCallback(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-    setIndex(prev => Math.max(0, prev - 1));
+    if (indexRef.current <= 0) return;
+    indexRef.current -= 1;
+    setCurrent(historyRef.current[indexRef.current]);
   }, []);
 
   const redo = useCallback(() => {
-    setIndex(prev => Math.min(history.length - 1, prev + 1));
-  }, [history.length]);
+    if (indexRef.current >= historyRef.current.length - 1) return;
+    indexRef.current += 1;
+    setCurrent(historyRef.current[indexRef.current]);
+  }, []);
 
-  const replace = useCallback((newState: T) => {
-    // Remplace l'état courant sans ajouter à l'historique (pour undo/redo interne)
-    setHistory(prev => {
-      const next = [...prev];
-      next[index] = newState;
-      return next;
-    });
-  }, [index]);
+  const reset = useCallback((newState: T) => {
+    historyRef.current = [newState];
+    indexRef.current = 0;
+    setCurrent(newState);
+  }, []);
 
   return {
     current,
     push,
     undo,
     redo,
+    reset,
     canUndo,
     canRedo,
-    replace,
   };
 }

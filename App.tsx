@@ -12,15 +12,15 @@ type AppMode = 'editor' | 'preview';
 const AppContent: React.FC = () => {
   const [mode, setMode] = useState<AppMode>('editor');
   const { t } = useI18n();
-  const [initialProject] = useState<ComicProject>(() => createInitialProject(t));
   const {
     current: project,
     push: pushProject,
     undo,
     redo,
+    reset: resetProject,
     canUndo,
     canRedo,
-  } = useProjectHistory<ComicProject>(initialProject);
+  } = useProjectHistory<ComicProject>(createInitialProject(t));
   const [isMetadataModalOpen, setIsMetadataModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -74,7 +74,7 @@ const AppContent: React.FC = () => {
         }
         
         if (importedProject.id && importedProject.sections && Array.isArray(importedProject.sections)) {
-          pushProject(importedProject);
+          resetProject(importedProject);
         } else {
           alert('Invalid project file');
         }

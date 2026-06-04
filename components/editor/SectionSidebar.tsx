@@ -62,6 +62,27 @@ const LAYOUT_PREVIEWS: Record<PageLayoutType, React.ReactNode> = {
       <div className="absolute bottom-0 right-0 w-2/3 h-1/2 bg-[var(--text-tertiary)] rounded-sm" />
     </div>
   ),
+  'panoramic': (
+    <div className="w-full h-full flex flex-col gap-0.5">
+      <div className="h-[35%] bg-[var(--border-active)] rounded-sm" />
+      <div className="flex-1 bg-[var(--border-active)] rounded-sm" />
+    </div>
+  ),
+  'cinematic': (
+    <div className="w-full h-full flex flex-col gap-0.5">
+      <div className="flex-1 bg-[var(--border-active)] rounded-sm" />
+      <div className="flex-1 bg-[var(--border-active)] rounded-sm" />
+      <div className="flex-1 bg-[var(--border-active)] rounded-sm" />
+    </div>
+  ),
+  '4-koma': (
+    <div className="w-full h-full flex flex-col gap-0.5">
+      <div className="flex-1 bg-[var(--border-active)] rounded-sm" />
+      <div className="flex-1 bg-[var(--border-active)] rounded-sm" />
+      <div className="flex-1 bg-[var(--border-active)] rounded-sm" />
+      <div className="flex-1 bg-[var(--border-active)] rounded-sm" />
+    </div>
+  ),
   'custom': (
     <div className="w-full h-full flex items-center justify-center">
       <div className="w-3/4 h-3/4 bg-[var(--border-active)] rounded-sm border-2 border-dashed border-[var(--border-focus)]" />
@@ -90,6 +111,9 @@ const SectionSidebar: React.FC<SectionSidebarProps> = ({
     'grid-3': { fr: '1+2 Col', en: '1+2 Col' },
     'manga-3': { fr: 'Manga', en: 'Manga' },
     'diagonal': { fr: 'Diagonal', en: 'Diagonal' },
+    'panoramic': { fr: 'Panoramique', en: 'Panoramic' },
+    'cinematic': { fr: 'Cinématique', en: 'Cinematic' },
+    '4-koma': { fr: '4-Koma', en: '4-Koma' },
     'custom': { fr: 'Custom', en: 'Custom' },
   };
 

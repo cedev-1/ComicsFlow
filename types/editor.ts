@@ -63,6 +63,9 @@ export type PageLayoutType =
   | 'grid-3'
   | 'manga-3'
   | 'diagonal'
+  | 'panoramic'
+  | 'cinematic'
+  | '4-koma'
   | 'custom';
 
 export interface PageLayout {
@@ -213,6 +216,21 @@ export const PAGE_LAYOUTS: Record<PageLayoutType, (pageId: string) => ImageZone[
   'diagonal': (pageId) => [
     createDefaultImageZone(`${pageId}-zone-1`, { x: 0, y: 0 }, { width: 65, height: 55 }),
     createDefaultImageZone(`${pageId}-zone-2`, { x: 35, y: 45 }, { width: 65, height: 55 }),
+  ],
+  'panoramic': (pageId) => [
+    createDefaultImageZone(`${pageId}-zone-1`, { x: 0, y: 0 }, { width: 100, height: 35 }),
+    createDefaultImageZone(`${pageId}-zone-2`, { x: 0, y: 35 }, { width: 100, height: 65 }),
+  ],
+  'cinematic': (pageId) => [
+    createDefaultImageZone(`${pageId}-zone-1`, { x: 0, y: 0 }, { width: 100, height: 33 }),
+    createDefaultImageZone(`${pageId}-zone-2`, { x: 0, y: 33 }, { width: 100, height: 34 }),
+    createDefaultImageZone(`${pageId}-zone-3`, { x: 0, y: 67 }, { width: 100, height: 33 }),
+  ],
+  '4-koma': (pageId) => [
+    createDefaultImageZone(`${pageId}-zone-1`, { x: 0, y: 0 }, { width: 100, height: 25 }),
+    createDefaultImageZone(`${pageId}-zone-2`, { x: 0, y: 25 }, { width: 100, height: 25 }),
+    createDefaultImageZone(`${pageId}-zone-3`, { x: 0, y: 50 }, { width: 100, height: 25 }),
+    createDefaultImageZone(`${pageId}-zone-4`, { x: 0, y: 75 }, { width: 100, height: 25 }),
   ],
   'custom': (pageId) => [
     createDefaultImageZone(`${pageId}-zone-1`, { x: 10, y: 10 }, { width: 80, height: 80 }),

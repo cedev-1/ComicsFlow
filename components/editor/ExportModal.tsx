@@ -18,6 +18,8 @@ const ExportModal: React.FC<ExportModalProps> = ({
   const { t } = useI18n();
   const [isExporting, setIsExporting] = useState(false);
   const [exportFormat, setExportFormat] = useState<ExportFormat>('html');
+  const [includeHeader, setIncludeHeader] = useState(true);
+  const [includeFooter, setIncludeFooter] = useState(true);
 
   if (!isOpen) return null;
 
@@ -164,7 +166,7 @@ const ExportModal: React.FC<ExportModalProps> = ({
     `;
   };
 
-  const generateFullHTML = (): string => {
+  const generateFullHTML = (showHeader: boolean, showFooter: boolean): string => {
     const sortedSections = [...project.sections].sort((a, b) => a.order - b.order);
     const totalHeight = sortedSections.reduce((acc, s) => acc + s.height, 0);
     
@@ -351,14 +353,14 @@ const ExportModal: React.FC<ExportModalProps> = ({
   </style>
 </head>
 <body>
-  <header class="comic-header">
+  ${showHeader ? `<header class="comic-header">
     <div class="comic-header-content">
       <div>
         <h1 class="comic-title">📖 ${project.title}</h1>
         <p class="comic-author">par ${project.author}</p>
       </div>
     </div>
-  </header>
+  </header>` : ''}
 
   <main class="comic-container">
     <div class="comic-content" style="background-color: ${project.backgroundColor};">
@@ -366,14 +368,14 @@ const ExportModal: React.FC<ExportModalProps> = ({
     </div>
   </main>
 
-  <footer class="comic-footer">
+  ${showFooter ? `<footer class="comic-footer">
     <h2>${t.theEnd}</h2>
     <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
       ↑ ${t.reread}
     </button>
   </footer>
 
-  <div class="scroll-indicator">↓ ${t.scrollToRead}</div>
+  <div class="scroll-indicator">↓ ${t.scrollToRead}</div>` : ''}
   <script>
     gsap.registerPlugin(ScrollTrigger);
     
@@ -420,7 +422,7 @@ const ExportModal: React.FC<ExportModalProps> = ({
   const handleExportHTML = async () => {
     setIsExporting(true);
     try {
-      const html = generateFullHTML();
+      const html = generateFullHTML(includeHeader, includeFooter);
       const blob = new Blob([html], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -557,6 +559,30 @@ const ExportModal: React.FC<ExportModalProps> = ({
               </div>
             </label>
           </div>
+
+          {/* HTML Options */}
+          {exportFormat === 'html' && (
+            <div className="mt-4 p-4 rounded-lg border border-[var(--border-active)] bg-[var(--bg-surface-raised)] space-y-3">
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={includeHeader}
+                  onChange={(e) => setIncludeHeader(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 rounded border-[var(--border-focus)] bg-[var(--bg-surface-raised)] text-blue-500 accent-blue-500"
+                />
+                <span className="text-sm text-[var(--text-secondary)]">{t.includeHeader}</span>
+              </label>
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={includeFooter}
+                  onChange={(e) => setIncludeFooter(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 rounded border-[var(--border-focus)] bg-[var(--bg-surface-raised)] text-blue-500 accent-blue-500"
+                />
+                <span className="text-sm text-[var(--text-secondary)]">{t.includeFooter}</span>
+              </label>
+            </div>
+          )}
         </div>
 
         {/* Footer */}

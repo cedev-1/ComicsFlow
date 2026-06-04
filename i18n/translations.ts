@@ -136,6 +136,8 @@ export interface Translations {
   htmlDescription: string;
   projectJson: string;
   jsonDescription: string;
+  includeHeader: string;
+  includeFooter: string;
   exporting: string;
   exportButton: string;
 }
@@ -275,6 +277,8 @@ export const translations: Record<Language, Translations> = {
     htmlDescription: 'Fichier HTML autonome avec animations. Idéal pour héberger sur un site web.',
     projectJson: 'Projet (JSON)',
     jsonDescription: 'Sauvegarde complète du projet. Permet de le réimporter plus tard.',
+    includeHeader: 'Afficher l\'en-tête (titre, auteur)',
+    includeFooter: 'Afficher le pied de page (fin, bouton retour en haut)',
     exporting: 'Export...',
     exportButton: 'Exporter',
   },
@@ -413,6 +417,8 @@ export const translations: Record<Language, Translations> = {
     htmlDescription: 'Standalone HTML file with animations. Ideal for hosting on a website.',
     projectJson: 'Project (JSON)',
     jsonDescription: 'Complete project backup. Allows reimporting later.',
+    includeHeader: 'Show header (title, author)',
+    includeFooter: 'Show footer (the end, back to top button)',
     exporting: 'Exporting...',
     exportButton: 'Export',
   },

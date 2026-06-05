@@ -25,8 +25,10 @@ const DraggableImageZone: React.FC<DraggableImageZoneProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
   const [resizeHandle, setResizeHandle] = useState<string | null>(null);
+  const [isCenterSnapped, setIsCenterSnapped] = useState(false);
   const dragStartRef = useRef({ x: 0, y: 0, zoneX: 0, zoneY: 0 });
   const resizeStartRef = useRef({ x: 0, y: 0, width: 0, height: 0, zoneX: 0, zoneY: 0 });
+  const SNAP_THRESHOLD = 2; // percent
 
   const getContainerSize = () => {
     if (!containerRef.current) return { width: 800, height: pageHeight };
@@ -56,9 +58,23 @@ const DraggableImageZone: React.FC<DraggableImageZoneProps> = ({
       const deltaX = ((e.clientX - dragStartRef.current.x) / containerSize.width) * 100;
       const deltaY = ((e.clientY - dragStartRef.current.y) / containerSize.height) * 100;
 
-      const newX = Math.max(0, Math.min(100 - zone.size.width, dragStartRef.current.zoneX + deltaX));
-      const newY = Math.max(0, Math.min(100 - zone.size.height, dragStartRef.current.zoneY + deltaY));
+      let newX = Math.max(0, Math.min(100 - zone.size.width, dragStartRef.current.zoneX + deltaX));
+      let newY = Math.max(0, Math.min(100 - zone.size.height, dragStartRef.current.zoneY + deltaY));
 
+      let snapped = false;
+
+      const centerX = newX + zone.size.width / 2;
+      if (Math.abs(centerX - 50) < SNAP_THRESHOLD) {
+        newX = 50 - zone.size.width / 2;
+        snapped = true;
+      }
+      const centerY = newY + zone.size.height / 2;
+      if (Math.abs(centerY - 50) < SNAP_THRESHOLD) {
+        newY = 50 - zone.size.height / 2;
+        snapped = true;
+      }
+
+      setIsCenterSnapped(snapped);
       onUpdate({
         ...zone,
         position: { x: newX, y: newY },
@@ -107,6 +123,7 @@ const DraggableImageZone: React.FC<DraggableImageZoneProps> = ({
     setIsDragging(false);
     setIsResizing(false);
     setResizeHandle(null);
+    setIsCenterSnapped(false);
   };
 
   useEffect(() => {
@@ -220,7 +237,9 @@ const DraggableImageZone: React.FC<DraggableImageZoneProps> = ({
       <div
         className={`relative w-full h-full overflow-hidden pointer-events-auto ${
           isSelected ? 'ring-2 ring-blue-500 ring-offset-2' : ''
-        } ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+        } ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} ${
+          isDragging && isCenterSnapped ? 'animate-pulse' : ''
+        }`}
         style={{
           borderRadius: zone.borderRadius,
           border: zone.comicEffect?.enabled 
@@ -229,6 +248,10 @@ const DraggableImageZone: React.FC<DraggableImageZoneProps> = ({
           backgroundColor: '#f5f5f5',
           width: zone.comicEffect?.enabled ? `calc(100% - ${zone.comicEffect.shadowOffset}px)` : '100%',
           height: zone.comicEffect?.enabled ? `calc(100% - ${zone.comicEffect.shadowOffset}px)` : '100%',
+          boxShadow: isDragging && isCenterSnapped 
+            ? '0 0 0 4px rgba(59, 130, 246, 0.5), 0 0 20px 8px rgba(59, 130, 246, 0.3)' 
+            : undefined,
+          transition: 'box-shadow 0.15s ease',
         }}
         onMouseDown={handleMouseDown}
         onDoubleClick={handleDoubleClick}
